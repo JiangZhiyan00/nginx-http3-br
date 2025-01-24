@@ -5,6 +5,7 @@ on:
     paths:
       - "Dockerfile"
       - "nginx.template.conf"
+      - ".github/workflows/deploy_to_dockerhub.yml"
     branches:
       - main
 
