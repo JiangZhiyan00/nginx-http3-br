@@ -67,7 +67,8 @@ RUN apt-get update && apt-get install -y \
     --with-stream_ssl_preread_module \
     --with-cc-opt='-Os -fomit-frame-pointer -g' \
     --with-ld-opt=-Wl,--as-needed,-O1,--sort-common \
-    && make modules
+    && make \
+    && make modules  # 确保编译所有模块
 
 # nginx-alpine镜像
 FROM nginx:${NGINX_VERSION}-alpine
