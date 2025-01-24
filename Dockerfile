@@ -78,8 +78,8 @@ ARG NGINX_VERSION
 # 将brotli依赖拷贝到nginx目录中
 COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_brotli_filter_module.so /usr/lib/nginx/modules/
 COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_brotli_static_module.so /usr/lib/nginx/modules/
-# 拷贝 HTTP/3 模块 
-COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_v3_module.so /usr/lib/nginx/modules/
+# 尝试复制 HTTP/3 模块
+COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_v3_module.so /usr/lib/nginx/modules/ || true
 
 # Nginx配置文件拷贝到nginx目录中
 COPY nginx.template.conf /etc/nginx/nginx.conf
