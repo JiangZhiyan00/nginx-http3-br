@@ -23,11 +23,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Get current date
+        id: current_date
+        run: |
+          echo "current_date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/nginx-brotli:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/nginx-brotli:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/nginx-http3-br:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/nginx-http3-br:${{ env.current_date }}
