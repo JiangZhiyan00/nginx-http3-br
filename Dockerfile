@@ -67,7 +67,7 @@ RUN apt-get update && apt-get install -y \
     --with-stream_ssl_preread_module \
     --with-cc-opt='-Os -fomit-frame-pointer -g' \
     --with-ld-opt=-Wl,--as-needed,-O1,--sort-common \
-    && make \
+    # && make \
     && make modules  # 确保编译所有模块
 
 # nginx-alpine镜像
@@ -79,7 +79,7 @@ ARG NGINX_VERSION
 COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_brotli_filter_module.so /usr/lib/nginx/modules/
 COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_brotli_static_module.so /usr/lib/nginx/modules/
 # 尝试复制 HTTP/3 模块
-COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_v3_module.so /usr/lib/nginx/modules/ || true
+# COPY --from=nginx_builder /root/nginx-${NGINX_VERSION}/objs/ngx_http_v3_module.so /usr/lib/nginx/modules/
 
 # Nginx配置文件拷贝到nginx目录中
 COPY nginx.template.conf /etc/nginx/nginx.conf
