@@ -1,1 +1,1 @@
-docker buildx build --platform linux/amd64 -t jiangzhiyan/nginx-br:latest --push .
+docker buildx build --platform linux/amd64 -t jiangzhiyan/nginx-http3-br:latest --push .
